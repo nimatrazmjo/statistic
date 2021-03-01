@@ -2,7 +2,9 @@
 const request = require("supertest");
 const { app } = require('../app');
 const url = '/api/statistics';
+
 describe(url, () => {
+
   it("Should return 422 if there is not any payload data", async () => {
     let response = await request(app)
       .post(url)
@@ -34,7 +36,11 @@ describe(url, () => {
     expect(response.status).toBe(422);
   });
 
-
+  it("Should return 404 if the route is not found", async () => {
+    let response = await request(app)
+      .get("/");
+    expect(response.status).toBe(404);
+  });
 });
 
 const data = {
